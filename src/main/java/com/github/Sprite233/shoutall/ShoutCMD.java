@@ -18,14 +18,14 @@ public class ShoutCMD extends Command {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
-            sender.sendMessage("§c后台不能使用此命令!");
+            sender.sendMessage("§cCommand can only be used by player!");
             return;
         }
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
 
         if (args.length == 0) {
-            player.sendMessage("§c信息不能为空!");
+            player.sendMessage("§cBlank Message!");
             return;
         }
 
@@ -34,13 +34,13 @@ public class ShoutCMD extends Command {
         long now = System.currentTimeMillis() / 1000;
         int time = 180 - (int) (now - before);
         if (time > 0) {
-            player.sendMessage("§c喊话冷却中... " + time + "秒");
+            player.sendMessage("§cCooldown " + time + "Seconds");
             if (!player.hasPermission("shoutall.bypass"))
                 return;
-            player.sendMessage("§a但你绕过了");
+            player.sendMessage("§aYou bypassed the cooldown");
         }
 
-        StringBuilder sb = new StringBuilder("§6[喊话] §e");
+        StringBuilder sb = new StringBuilder("§6[Shout] §e");
         sb.append(player.getDisplayName());
         sb.append("§f: ");
 
@@ -51,13 +51,13 @@ public class ShoutCMD extends Command {
             sb.append(" ");
         }
 
-        sb.append("§b§l§n(点击传送)");
+        sb.append("§b§l§n(Click to teleport)");
 
         String token = UUID.randomUUID().toString().replace("-", "");
 
         TextComponent tc = new TextComponent(sb.toString());
         tc.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpserver " + token));
-        tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§c点击传送至服务器 §e" + player.getServer().getInfo().getName()).create()));
+        tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§cClick to teleport §e" + player.getServer().getInfo().getName()).create()));
 
         for (ProxiedPlayer player1 : ShoutAll.getInstance().getProxy().getPlayers()) {
             player1.sendMessage(tc);
