@@ -13,11 +13,11 @@ public class TpCMD extends Command {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
-            sender.sendMessage("§c后台不能使用此命令");
+            sender.sendMessage("§cCommand can only be used by player!");
             return;
         }
         if (args.length != 1) {
-            sender.sendMessage("§c参数错误");
+            sender.sendMessage("§cError");
             return;
         }
 
@@ -32,7 +32,7 @@ public class TpCMD extends Command {
         if (data != null && (180 - (int) (System.currentTimeMillis() / 1000 - data.time)) >= 0) {
             ((ProxiedPlayer) sender).connect(ShoutAll.getInstance().getProxy().getServerInfo(data.server));
         } else {
-            sender.sendMessage(new TextComponent("§c未知的 Token 或 Token 已失效."));
+            sender.sendMessage(new TextComponent("§cUnkown or expired token."));
         }
     }
 }
