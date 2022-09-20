@@ -32,7 +32,7 @@ public class ShoutCMD extends Command {
         Data data = ShoutAll.getInstance().getAllData().get(player);
         long before = data.time;
         long now = System.currentTimeMillis() / 1000;
-        int time = 180 - (int) (now - before);
+        int time = 15 - (int) (now - before);
         if (time > 0) {
             player.sendMessage("§cCooldown " + time + "Seconds");
             if (!player.hasPermission("shoutall.bypass"))
