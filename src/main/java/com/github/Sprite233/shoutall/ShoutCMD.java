@@ -40,7 +40,7 @@ public class ShoutCMD extends Command {
             player.sendMessage("§aYou bypassed the cooldown");
         }
 
-        StringBuilder sb = new StringBuilder("§6[Shout] §e");
+        StringBuilder sb = new StringBuilder("§b[Shout] §e");
         sb.append(player.getDisplayName());
         sb.append("§f: ");
 
@@ -51,13 +51,13 @@ public class ShoutCMD extends Command {
             sb.append(" ");
         }
 
-        sb.append("§b§l§n(Click to teleport)");
+        sb.append("§b[Click to teleport]");
 
         String token = UUID.randomUUID().toString().replace("-", "");
 
         TextComponent tc = new TextComponent(sb.toString());
         tc.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpserver " + token));
-        tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§cClick to teleport §e" + player.getServer().getInfo().getName()).create()));
+        tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§cClick to teleport §a" + player.getServer().getInfo().getName()).create()));
 
         for (ProxiedPlayer player1 : ShoutAll.getInstance().getProxy().getPlayers()) {
             player1.sendMessage(tc);
